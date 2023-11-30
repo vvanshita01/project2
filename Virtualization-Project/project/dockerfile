@@ -1,0 +1,25 @@
+# Use an official Python runtime as a parent image
+FROM python:3.8-slim
+
+# Set the working directory to /app
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+COPY . /app
+
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Set environment variables
+ENV DJANGO_SETTINGS_MODULE=project.settings
+ENV DJANGO_SECRET_KEY='django-insecure-s!5we1c3l7e^onwk05w0gr=6vupbbad+v+_ye&clcf!i_cze0-'
+ENV DJANGO_DEBUG=True
+ENV DJANGO_ALLOWED_HOSTS=localhost
+ENV DJANGO_DATABASE_ENGINE=sqlite3
+ENV DJANGO_DATABASE_NAME=/app/db.sqlite3
+
+# Expose port 80
+EXPOSE 80
+
+# Specify default command
+CMD ["python", "app.py"]
