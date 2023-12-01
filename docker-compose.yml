@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql-container
+    environment:
+      MYSQL_DATABASE: app
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: 123456789
+      MYSQL_ROOT_PASSWORD: 123456789
+    ports:
+      - "3306:3306" 
+    volumes:
+      - mysql_data:/var/lib/mysql  # Mount a volume for MySQL data persistence
+      
+  django:
+    image: bookbank
+    container_name: django-container 
+    ports:
+      - "8000:8000" 
+    depends_on:
+      - mysql
+
+
+
+volumes: 
+  mysql_data:
+    
+
